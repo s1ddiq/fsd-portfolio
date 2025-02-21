@@ -20,7 +20,7 @@ const Home = () => {
           </span>
         </h1>
         <p className="text-lg text-blue-2 md:w-2/5 w-full">
-          // With 3+ years in web development, the goal is to pave the way to
+          With 3+ years in web development, the goal is to pave the way to
           success. Seeing beautiful websites inspires the creation of even{" "}
           <span className="text-sm ">
             <span className="font-extrabold">better ones.</span>
