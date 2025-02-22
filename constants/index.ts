@@ -2,7 +2,7 @@ export const sidebarLinks = [
     {
         title: 'bio',
         icon: '/icons/red-folder.svg',
-        url: '/bio',
+        url: '/',
     },
     {
         title: 'interests',
@@ -27,14 +27,17 @@ export const socialLinks = [
     {
         name: 'github',
         icon: '/icons/github.svg',
+        url: 'https://github.com/s1ddiq',
     },
     {
         name: 'twitter',
         icon: '/icons/twitter.svg',
+        url: 'https://github.com/s1ddiq',
     },
     {
         name: 'discord',
         icon: '/icons/discord.svg',
+        url: '/discord-user',
     }
 ]
 

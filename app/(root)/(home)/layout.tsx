@@ -4,7 +4,7 @@ import React from "react";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex bg-blue-1 md:overflow-hidden">
+    <div className="flex bg-blue-1">
       <Sidebar />
       <div className="flex-1">
         <Header />

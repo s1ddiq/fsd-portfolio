@@ -5,41 +5,45 @@ import React from "react";
 
 const Home = () => {
   return (
-    <main className="relative h-full  overflow-clip">
+    <main className="relative min-h-screen">
       {/*Seperator */}
-      <div className="h-px w-full bg-blue-3 absolute top-64"></div>
+      <div className="h-px w-full bg-blue-3 absolute md:block hidden "></div>
 
-      <section className="code px-6 py-4 md:flex justify-center items-center flex-col">
-        <h1 className="text-4xl text-blue-2 brightness-150 md:text-center">
-          Building the web since{" "}
-          <span className="text-4xl relative">
-            2021
-            <p className="absolute text-xl opacity-50 top-0 -right-2 rotate-45">
-              🙏
-            </p>
-          </span>
-        </h1>
-        <p className="text-lg text-blue-2 md:w-2/5 w-full">
-          With 3+ years in web development, the goal is to pave the way to
-          success. Seeing beautiful websites inspires the creation of even{" "}
-          <span className="text-sm ">
-            <span className="font-extrabold">better ones.</span>
-          </span>
-        </p>
+      <section className="code px-6 py-4 flex">
+        <div>
+          <h1 className="text-4xl text-blue-2 brightness-150">
+            Building the web since <span className="text-4xl">2021</span>
+          </h1>
+          <p className="text-lg text-blue-2 w-full">
+            I'm Siddiq, a web developer with over three years of experience,
+            focused on building clean, well-crafted websites that leave a
+            lasting impression. Whether it’s a sleek landing page or a
+            meticulously optimized site, I aim for both function and aesthetics.
+            Great design isn’t just inspiring—it’s a challenge to create
+            something even better.
+            <span className="text-sm ">
+              <span className="font-extrabold">better ones.</span>
+            </span>
+          </p>
+        </div>
+        {/*Seperator */}
+        {/* <div className="h-full w-px bg-blue-3 absolute right-64"></div> */}
       </section>
 
       {/*Seperator */}
-      <div className="h-px w-full bg-blue-3 absolute bottom-12"></div>
+      <div className="h-px w-full bg-blue-3 absolute md:bottom-12 bottom-2"></div>
       <div className=" text-sm text-blue-3 code font-semibold absolute bottom-0 px-6">
         2025
       </div>
 
       <section className="px-6 mt-24 py-6 code flex justify-center flex-col items-center">
         <div className="mt-4 lg:mt-12 mb-8">
-          <p className="text-4xl text-blue-2 brightness-150">Latest Projects</p>
+          <p className="text-4xl text-blue-2 brightness-150 text-center">
+            Latest Projects
+          </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 md:justify-between justify-center lg:justify-start overflow-hidden">
+        <div className="flex flex-wrap gap-4 justify-center overflow-hidden">
           {projects.map((project) => (
             <div
               className="w-64 h-72 bg-noise border-2 border-blue-3 hover:-translate-y-px p-4 flex justify-between items-center flex-col mb-4"

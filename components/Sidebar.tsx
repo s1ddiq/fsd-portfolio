@@ -1,7 +1,7 @@
 "use client";
 import { sidebarLinks, socialLinks } from "@/constants";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
@@ -11,6 +11,23 @@ import Link from "next/link";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsVisible(true); // Show at the top
+      } else {
+        setIsVisible(false); // Hide when scrolling down
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="flex">
@@ -22,12 +39,6 @@ const Sidebar = () => {
       >
         <div className="p-4 flex justify-center flex-col">
           {/* Toggle button */}
-          <Button
-            className="bg-blue-3 text-white rounded mb-4 hover:bg-blue-3 hover:opacity-85"
-            onClick={() => setOpen(!open)}
-          >
-            <Menu size={30} />
-          </Button>
 
           {/* Sidebar links */}
           <nav className="mt-4 space-y-4 w-full code">
@@ -54,7 +65,7 @@ const Sidebar = () => {
         <div className="h-px w-full bg-blue-3 absolute top-64"></div>
         {/*TODO: hide text on desktop/larger screens */}
         <>
-          <div className="p-4 code text-blue-2 mt-8">
+          <div className="p-4 code text-blue-2 mt-12">
             <div className="flex flex-col">
               <div className="flex gap-2">
                 <Image
@@ -70,12 +81,14 @@ const Sidebar = () => {
               <div className={cn("flex gap-4", open ? "flex-row" : "flex-col")}>
                 {socialLinks.map((social) => (
                   <div key={social.name}>
-                    <Image
-                      src={social.icon}
-                      width={24}
-                      height={24}
-                      alt="social"
-                    />
+                    <Link href={social.url || "#"}>
+                      <Image
+                        src={social.icon}
+                        width={24}
+                        height={24}
+                        alt="social"
+                      />
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -98,10 +111,19 @@ const Sidebar = () => {
       </aside>
 
       {/* Sheet for mobile */}
-      <Sheet>
-        <SheetTrigger className="md:hidden fixed z-50 right-2 top-2 p-2">
-          <Menu size={48} className="text-blue-1 bg-blue-2 rounded-xl p-2" />
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger
+          className={`md:hidden fixed z-50 p-2  w-full bg-blue-1 border-b border-blue-2 ${
+            isVisible
+              ? "transform -translate-y-full"
+              : "transform translate-y-0"
+          } scrolling-hidden`}
+        >
+          <div className="sticky top-2 flex justify-end">
+            <Menu size={48} className="text-white rounded-xl p-2" />
+          </div>
         </SheetTrigger>
+
         <SheetContent
           side="left"
           className="bg-blue-1 border-r-[1px] border-blue-3"
@@ -109,14 +131,20 @@ const Sidebar = () => {
           <DialogTitle>{}</DialogTitle>
           <nav className="space-y-12 code text-2xl">
             {sidebarLinks.map((link) => (
-              <div key={link.title} className="flex gap-2 text-blue-2">
-                <Image
-                  src={link.icon}
-                  alt={link.title}
-                  width={20}
-                  height={20}
-                />
-                <p>{link.title}</p>
+              <div key={link.title} className=" text-blue-2">
+                <Link
+                  href={link.url}
+                  className="flex gap-2"
+                  onClick={() => setOpen(false)}
+                >
+                  <Image
+                    src={link.icon}
+                    alt={link.title}
+                    width={20}
+                    height={20}
+                  />
+                  <p>{link.title}</p>
+                </Link>
               </div>
             ))}
           </nav>
